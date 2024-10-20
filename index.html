@@ -2,50 +2,60 @@
 <html ng-app="kaiosChatApp">
   <head>
     <title>KaiOS Chat App</title>
-    
-    <link rel="stylesheet" href="styles.css">
+
+    <link rel="stylesheet" href="styles.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="app.js" defer></script>
-    
   </head>
 
-  <body ng-controller="ChatController as chatCtrl" ng-keydown="chatCtrl.handleKeyDown($event)">
+  <body
+    ng-controller="ChatController as chatCtrl"
+    ng-keydown="chatCtrl.handleKeyDown($event)"
+  >
     <div class="chat-container">
-      <div ng-repeat="item in chatCtrl.itemObjects track by $index" 
-      class="message" 
-      ng-class="{'bot': !item.fromMe, 'sender': item.fromMe , 'focused': $index === chatCtrl.focusIndex}"
-      tabindex="-1"
+      <div
+        ng-repeat="item in chatCtrl.itemObjects track by $index"
+        class="message"
+        ng-class="{'bot': !item.fromMe, 'sender': item.fromMe , 'focused': ($index === chatCtrl.focusIndex) && (item.messageObj[item.carouselIndex].actionFocusIndex === -1)}"
+        tabindex="-1"
       >
-    
+        <div class="left-arrow-key" ng-if="item.showLeftArrow()">⬅</div>
+        <div class="right-arrow-key" ng-if="item.showRightArrow()">➡</div>
 
-      <div class="left-arrow-key" ng-if="item.showLeftArrow()">
-        ⬅
-      </div >
-      <div class="right-arrow-key" ng-if="item.showRightArrow()">
-        ➡
-      </div >
-      
         <!-- Display message text -->
-        <p ng-if="item.messageObj[item.carouselIndex].text" >{{ item.messageObj[item.carouselIndex].text }}</p>
-
-        <!-- Show description if available -->
-        <p ng-if="item.messageObj[item.carouselIndex].description" class="message-description">{{ item.messageObj[item.carouselIndex].description }}</p>
+        <p ng-if="item.messageObj[item.carouselIndex].text">
+          {{ item.messageObj[item.carouselIndex].text }}
+        </p>
 
         <!-- Show image if available -->
-        <img ng-if="item.messageObj[item.carouselIndex].image" ng-src="{{ item.messageObj[item.carouselIndex].image }}" alt="Message Image">
+        <img
+          ng-if="item.messageObj[item.carouselIndex].image"
+          ng-src="{{ item.messageObj[item.carouselIndex].image }}"
+          alt="Message Image"
+        />
+
+        <!-- Show description if available -->
+        <p
+          ng-if="item.messageObj[item.carouselIndex].description"
+          class="message-description"
+        >
+          {{ item.messageObj[item.carouselIndex].description }}
+        </p>
 
         <!-- Show actions if available -->
-        <div class="actions" ng-if="item.messageObj[item.carouselIndex].actions.length > 0">
+        <div
+          class="actions"
+          ng-if="item.messageObj[item.carouselIndex].actions.length > 0"
+        >
           <button
             ng-repeat="action in item.messageObj[item.carouselIndex].actions track by $index"
             class="action-button"
             ng-class="{'focused': $parent.$index ==chatCtrl.focusIndex && item.messageObj[item.carouselIndex].isActionFocused($index)}"
-            tabindex="-1" 
+            tabindex="-1"
           >
-            {{ action.text }} 
+            {{ action.text }}
           </button>
         </div>
-
       </div>
     </div>
   </body>

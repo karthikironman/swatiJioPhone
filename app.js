@@ -7,116 +7,122 @@ angular
     vm.items = [
       {
         by: "bot",
-        text: "Welcome to our restaurant! Here's our menu. 111",
+        text: "Welcome to Gourmet Bites! Here's our menu.",
         image: "https://thumbs.dreamstime.com/b/restaurant-menu-design-retro-coffee-typography-sign-chalkboard-can-be-used-as-board-bars-brochure-vector-shop-cafe-164531720.jpg",
-        description: "Enjoy our best dishes.",
+        description: "Enjoy our chef's specials and handcrafted dishes.",
         actions: [
           { text: "View Specials", link: "https://example.com/specials" },
           { text: "Order Now", link: "https://example.com/order" },
-          { text: "3", link: "https://example.com/order" },
+          { text: "See Full Menu", link: "https://example.com/full_menu" },
         ],
       },
       {
         by: "sender",
-        text: "Looks delicious! What are today's specials?",
+        text: "Looks great! What are today's specials?",
       },
       {
         by: "bot",
-        text: "Welcome to our restaurant! Here's our menu.",
-        image: "https://thumbs.dreamstime.com/b/restaurant-menu-design-retro-coffee-typography-sign-chalkboard-can-be-used-as-board-bars-brochure-vector-shop-cafe-164531720.jpg",
-        description: "Enjoy our best dishes.",
-        actions: [
-          { text: "View Specials", link: "https://example.com/specials" },
-          { text: "Order Now", link: "https://example.com/order" },
-          { text: "3", link: "https://example.com/order" },
+        text: "Today's specials are fresh and ready for you!",
+        carousel: true,
+        items: [
+          {
+            text: "Grilled Chicken with Herbs",
+            image: "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-roast-a-chicken-step-by-step-png-image_12531944.png",
+            description: "Tender chicken breast marinated in herbs, served with a side of roasted vegetables.",
+            actions: [
+              { text: "Order Grilled Chicken", link: "https://example.com/grilled_chicken" },
+              { text: "More Info", link: "https://example.com/info_grilled_chicken" },
+            ],
+          },
+          {
+            text: "Vegetarian Pasta Primavera",
+            image: "https://www.yummytummyaarthi.com/wp-content/uploads/2022/11/red-sauce-pasta-1.jpg",
+            description: "A delightful mix of fresh vegetables and pasta in a light garlic sauce.",
+            actions: [
+              { text: "Order Pasta Primavera", link: "https://example.com/primavera" },
+              { text: "More Info", link: "https://example.com/info_primavera" },
+            ],
+          },
+          {
+            text: "BBQ Ribs",
+            image: "https://thecozycook.com/wp-content/uploads/2023/05/Creamy-Chicken-Pasta-f.jpg",
+            description: "Slow-cooked ribs with our house BBQ sauce. Served with fries and coleslaw.",
+            actions: [
+              { text: "Order BBQ Ribs", link: "https://example.com/bbq_ribs" },
+              { text: "More Info", link: "https://example.com/info_bbq_ribs" },
+            ],
+          },
         ],
-      },
-      {
-      by: "bot",
-      text: "Today's specials are ready for you!",
-      carousel: true,
-      items: [
-        {
-          text: "Grilled Chicken 1 ",
-          image: "https://example.com/grilled_chicken.jpg",
-          description: "Perfectly grilled chicken with spices.",
-          actions: [
-            { text: "Order Grilled Chicken", link: "https://example.com/grilled_chicken" },
-            { text: "More Info", link: "https://example.com/info_grilled_chicken" },
-          ],
-        },
-        {
-          text: "Grilled Chicken 2 ",
-          image: "https://example.com/grilled_chicken.jpg",
-          description: "Perfectly grilled chicken with spices.",
-          actions: [
-            { text: "Order Grilled Chicken", link: "https://example.com/grilled_chicken" },
-            { text: "More Info", link: "https://example.com/info_grilled_chicken" },
-          ],
-        },
-      ],
       },
       {
         by: "sender",
-        text: "I'll have the grilled chicken, please.",
+        text: "I'll have the Grilled Chicken, please.",
       },
       {
         by: "bot",
-        text: "Your order for Grilled Chicken has been placed. Anything else?",
+        text: "Your order for Grilled Chicken has been placed. Would you like to add a drink or dessert?",
         actions: [
-          { text: "Check Order Status", link: "https://example.com/order_status" },
+          { text: "Add a Drink", link: "https://example.com/drinks" },
+          { text: "Add a Dessert", link: "https://example.com/desserts" },
         ],
       },
       {
-        by: "bot",
-        text: "Your order for Grilled Chicken has been placed. Anything else?",
-        actions: [
-          { text: "Check Order Status", link: "https://example.com/order_status" },
-        ],
+        by: "sender",
+        text: "What desserts do you have?",
       },
       {
         by: "bot",
-        text: "Your order for Grilled Chicken has been placed. Anything else?",
-        actions: [
-          { text: "Check Order Status", link: "https://example.com/order_status" },
+        text: "Here's a selection of our desserts!",
+        carousel: true,
+        items: [
+          {
+            text: "Chocolate Lava Cake",
+            image: "https://5.imimg.com/data5/OZ/XE/ZF/SELLER-31224178/100-gm-choco-lava-cake-500x500.jpg",
+            description: "A rich, warm chocolate cake with a molten center.",
+            actions: [
+              { text: "Order Lava Cake", link: "https://example.com/lava_cake" },
+            ],
+          },
+          {
+            text: "Cheesecake",
+            image: "https://cakesbymk.com/wp-content/uploads/2023/11/Template-Size-for-Blog-Photos-24.jpg",
+            description: "Creamy New York-style cheesecake with a graham cracker crust.",
+            actions: [
+              { text: "Order Cheesecake", link: "https://example.com/cheesecake" },
+            ],
+          },
+          {
+            text: "Tiramisu",
+            image: "https://handletheheat.com/wp-content/uploads/2015/11/oreo-cheesecake-recipe-SQUARE.jpg",
+            description: "Layers of mascarpone cheese, espresso-soaked ladyfingers, and cocoa.",
+            actions: [
+              { text: "Order Tiramisu", link: "https://example.com/tiramisu" },
+            ],
+          },
         ],
       },
       {
-        by: "bot",
-        text: "Your order for Grilled Chicken has been placed. Anything else?",
-        actions: [
-          { text: "Check Order Status", link: "https://example.com/order_status" },
-        ],
+        by: "sender",
+        text: "I'll take the Tiramisu as well!",
       },
       {
         by: "bot",
-        text: "Your order for Grilled Chicken has been placed. Anything else?",
+        text: "Tiramisu added to your order. Anything else?",
         actions: [
           { text: "Check Order Status", link: "https://example.com/order_status" },
+          { text: "Place Full Order", link: "https://example.com/checkout" },
         ],
       },
       {
-        by: "bot",
-        text: "Your order for Grilled Chicken has been placed. Anything else?",
-        actions: [
-          { text: "Check Order Status", link: "https://example.com/order_status" },
-        ],
+        by: "sender",
+        text: "No, that's all for now.",
       },
       {
         by: "bot",
-        text: "Your order for Grilled Chicken has been placed. Anything else?",
-        actions: [
-          { text: "Check Order Status", link: "https://example.com/order_status" },
-        ],
-      },
-      {
-        by: "bot",
-        text: "Your order for Grilled Chicken has been placed. Anything else?",
-        actions: [
-          { text: "Check Order Status", link: "https://example.com/order_status" },
-        ],
+        text: "Great! Your order will be ready in 30 minutes. Thank you for choosing Gourmet Bites!",
       },
     ];
+    
 
     vm.focusIndex = 0; // The message to focus when the chat is loaded
 
@@ -212,6 +218,9 @@ angular
  
       handleEnter(){
         // handle enter here
+        if(this.actionFocusIndex >= 0){
+          console.log(this.actions[this.actionFocusIndex])
+        }
       }
 
       isActionFocused(actionIndex){
