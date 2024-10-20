@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html ng-app="kaiosChatApp">
+  <head>
+    <title>KaiOS Chat App</title>
+    
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="app.js" defer></script>
+    
+  </head>
+
+  <body ng-controller="ChatController as chatCtrl" ng-keydown="chatCtrl.handleKeyDown($event)">
+    <div class="chat-container">
+      <div ng-repeat="messageObj in chatCtrl.messageObjects" 
+      class="message" 
+      ng-class="{'bot': chatCtrl.messages[$index].by === 'bot', 'sender': chatCtrl.messages[$index].by === 'sender', 'focused': $index === chatCtrl.focusIndex}"
+      tabindex="-1"
+      >
+        <!-- Display message text -->
+        <p ng-if="messageObj.text" >{{ messageObj.text }}</p>
+
+        <!-- Show description if available -->
+        <p ng-if="messageObj.description" class="message-description">{{ messageObj.description }}</p>
+
+        <!-- Show image if available -->
+        <img ng-if="chatCtrl.messages[$index].image" ng-src="{{ chatCtrl.messages[$index].image }}" alt="Message Image">
+
+        <!-- Show actions if available -->
+        <div class="actions" ng-if="messageObj.actions.length > 0">
+          <button
+            ng-repeat="action in messageObj.actions"
+            class="action-button"
+            ng-class="{'focused': messageObj.isActionFocused($index)}"
+            ng-click="chatCtrl.openLink(action.link)"
+            tabindex="-1" 
+          >
+            {{ action.text }}
+          </button>
+        </div>
+
+        <!-- Carousel handling -->
+        <div class="carousel-item" ng-if="chatCtrl.messages[$index].carousel">
+          <div ng-repeat="item in chatCtrl.messages[$index].items">
+            <p>{{ item.text }}</p>
+            <img ng-src="{{ item.image }}" alt="{{ item.text }}" />
+            <p>{{ item.description }}</p>
+
+            <div class="actions" ng-if="item.actions.length > 0">
+              <button
+                ng-repeat="action in item.actions"
+                class="action-button"
+                ng-click="chatCtrl.openLink(action.link)"
+              >
+                {{ action.text }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
