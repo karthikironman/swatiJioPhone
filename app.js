@@ -4,10 +4,10 @@ angular
     var vm = this;
 
     // Sample JSON data
-    vm.messages = [
+    vm.items = [
       {
         by: "bot",
-        text: "Welcome to our restaurant! Here's our menu.",
+        text: "Welcome to our restaurant! Here's our menu. 111",
         image: "https://thumbs.dreamstime.com/b/restaurant-menu-design-retro-coffee-typography-sign-chalkboard-can-be-used-as-board-bars-brochure-vector-shop-cafe-164531720.jpg",
         description: "Enjoy our best dishes.",
         actions: [
@@ -31,22 +31,31 @@ angular
           { text: "3", link: "https://example.com/order" },
         ],
       },
-      // {
-      //   by: "bot",
-      //   text: "Today's specials are ready for you!",
-      //   carousel: true,
-      //   items: [
-      //     {
-      //       text: "Grilled Chicken",
-      //       image: "https://example.com/grilled_chicken.jpg",
-      //       description: "Perfectly grilled chicken with spices.",
-      //       actions: [
-      //         { text: "Order Grilled Chicken", link: "https://example.com/grilled_chicken" },
-      //         { text: "More Info", link: "https://example.com/info_grilled_chicken" },
-      //       ],
-      //     },
-      //   ],
-      // },
+      {
+      by: "bot",
+      text: "Today's specials are ready for you!",
+      carousel: true,
+      items: [
+        {
+          text: "Grilled Chicken 1 ",
+          image: "https://example.com/grilled_chicken.jpg",
+          description: "Perfectly grilled chicken with spices.",
+          actions: [
+            { text: "Order Grilled Chicken", link: "https://example.com/grilled_chicken" },
+            { text: "More Info", link: "https://example.com/info_grilled_chicken" },
+          ],
+        },
+        {
+          text: "Grilled Chicken 2 ",
+          image: "https://example.com/grilled_chicken.jpg",
+          description: "Perfectly grilled chicken with spices.",
+          actions: [
+            { text: "Order Grilled Chicken", link: "https://example.com/grilled_chicken" },
+            { text: "More Info", link: "https://example.com/info_grilled_chicken" },
+          ],
+        },
+      ],
+      },
       {
         by: "sender",
         text: "I'll have the grilled chicken, please.",
@@ -111,11 +120,63 @@ angular
 
     vm.focusIndex = 0; // The message to focus when the chat is loaded
 
+    class Item {
+      constructor(data){
+        console.log(data)
+        if(data.items){
+          //carousel item
+          this.items = data.items;
+        }else{
+          // pushing the items into array
+          this.items = [data];
+        }
+        this.fromMe = data.by === 'sender'; //true if the user owns the message, else false
+        this.messageObj = this.items.map((x,index)=> new Message(x,index));
+        console.log(this.messageObj);
+        console.log("-------------")
+        this.carouselIndex = 0; //focus the first slide first
+      }
+      resetIndex(){
+        this.carouselIndex = 0;
+      }
+      isCarouselItem(){
+        return this.messageObj.length > 1;
+      }
+      showLeftArrow(){
+        return this.isCarouselItem() && (this.carouselIndex > 0);
+      }
+      showRightArrow(){
+        return this.isCarouselItem() && (this.carouselIndex < this.messageObj.length - 1) ;
+      }
+      handleArrowLeft(){
+        if(this.isCarouselItem()) {
+          this.messageObj[this.carouselIndex].resetActionIndex();
+          if(this.showLeftArrow()){
+            this.carouselIndex--;
+          }
+        }
+      }
+      handleArrowRight(){
+        if(this.isCarouselItem()) {
+          this.messageObj[this.carouselIndex].resetActionIndex();
+          if(this.showRightArrow()){
+            this.carouselIndex++;
+          }
+        }
+      }
+      handleArrowDown(){
+      this.messageObj[this.carouselIndex].handleArrowDown();
+      }
+      handleArrowUp(){
+        this.messageObj[this.carouselIndex].handleArrowUp();
+      }
+    }
      // Message class for handling individual message interactions
      class Message {
       constructor(data, index) {
         this.text = data.text;
         this.description = data.description;
+        this.image = data.image;
         this.actions = data.actions || [];
         this.actionFocusIndex = 0;
         this.index = index; // Track the message index
@@ -151,22 +212,21 @@ angular
       }
 
       isActionFocused(actionIndex){
-         if(vm.focusIndex == this.index){
           return actionIndex == this.actionFocusIndex;
-         }
-         return false; //when the message is not focused, even when the index is 0, the message is not focused
+         
+        // return false; //when the message is not focused, even when the index is 0, the message is not focused
       }
       resetActionIndex(){
         this.actionFocusIndex = 0;
       }
     }
 
-    vm.messageObjects = vm.messages.map((msg, index) => new Message(msg, index));
-
+   vm.itemObjects = vm.items.map((msg, index) => new Item(msg, index));
+   console.log(vm.itemObjects)
     // Handle moving to the next message
     vm.handleNextMessage = () => {
       vm.focusIndex++;
-      if (vm.focusIndex >= vm.messages.length) {
+      if (vm.focusIndex >= vm.itemObjects.length) {
         vm.focusIndex = 0; // Loop back to the first message
       }
     };
@@ -175,21 +235,23 @@ angular
     vm.handlePreviousMessage = () => {
       vm.focusIndex--;
       if (vm.focusIndex < 0) {
-        vm.focusIndex = vm.messages.length - 1; // Loop back to the last message
+        vm.focusIndex = vm.itemObjects.length - 1; // Loop back to the last message
       }
     };
-
-   
 
     // Keydown handler for navigating between messages and actions
     vm.handleKeyDown = function (event) {
       event.preventDefault();
-      const currentMessageObj = vm.messageObjects[vm.focusIndex];
+      const currentMessageObj = vm.itemObjects[vm.focusIndex];
 
       if (event.key === "ArrowDown") {
         currentMessageObj.handleArrowDown();
       } else if (event.key === "ArrowUp") {
         currentMessageObj.handleArrowUp();
+      }else if (event.key === "ArrowLeft") {
+        currentMessageObj.handleArrowLeft();
+      }else if (event.key === "ArrowRight") {
+        currentMessageObj.handleArrowRight();
       } else if (event.key === "Enter") {
         currentMessageObj.handleEnter();
       }
