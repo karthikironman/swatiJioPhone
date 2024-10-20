@@ -14,6 +14,7 @@
     margin-bottom: 10px;
     border-radius: 5px;
     font-size: 14px;
+    position:relative;
   }
 
   .message.bot {
@@ -53,11 +54,11 @@
   }
 
   .action-button:focus {
-    outline: 10px solid rgb(4, 255, 0);
+    outline: 5px solid rgb(4, 255, 0);
   }
 
   .focused {
-    outline: 10px solid orange;
+    outline: 3px solid orange;
   }
 
   .message-description {
@@ -73,4 +74,24 @@
 
   .carousel-item img {
     max-width: 100%;
+  }
+
+  .left-arrow-key{
+    width: auto;
+    position:absolute;
+    top:50%;
+    left:-1rem;
+    transform: translate(0,-50%);
+    font-size: 2rem;
+    padding: 0;
+    margin:0;
+  }
+  .right-arrow-key{
+    width: auto;
+    position:absolute;
+    top:50%;
+    right:-1rem;
+    transform: translate(0,-50%);
+    font-size: 2rem;
+    padding: 0;
   }

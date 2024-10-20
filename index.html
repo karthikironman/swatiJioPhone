@@ -18,19 +18,15 @@
       >
     
 
-      <div ng-if="item.showLeftArrow()">
-        left
+      <div class="left-arrow-key" ng-if="item.showLeftArrow()">
+        ⏪
       </div >
-      <div ng-if="item.showRightArrow()">
-        right {{item.messageObj.length}}
-      </div >
-      <div >
-        carousel index {{item.carouselIndex}}
+      <div class="right-arrow-key" ng-if="item.showRightArrow()">
+        ⏩
       </div >
       
         <!-- Display message text -->
         <p ng-if="item.messageObj[item.carouselIndex].text" >{{ item.messageObj[item.carouselIndex].text }}</p>
-        <p ng-if="item.messageObj[item.carouselIndex].text" >{{item.carouselIndex + " " +item.messageObj[item.carouselIndex].isActionFocused($index)?'true':'false'}}</p>
 
         <!-- Show description if available -->
         <p ng-if="item.messageObj[item.carouselIndex].description" class="message-description">{{ item.messageObj[item.carouselIndex].description }}</p>
@@ -51,24 +47,6 @@
           </button>
         </div>
 
-        <!-- Carousel handling
-        <div class="carousel-item" ng-if="chatCtrl.messages[$index].carousel">
-          <div ng-repeat="item in chatCtrl.messages[$index].items">
-            <p>{{ item.text }}</p>
-            <img ng-src="{{ item.image }}" alt="{{ item.text }}" />
-            <p>{{ item.description }}</p>
-
-            <div class="actions" ng-if="item.actions.length > 0">
-              <button
-                ng-repeat="action in item.actions"
-                class="action-button"
-                ng-click="chatCtrl.openLink(action.link)"
-              >
-                {{ action.text }}
-              </button>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </body>
