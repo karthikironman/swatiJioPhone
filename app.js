@@ -3,7 +3,6 @@ angular
   .controller("ChatController", function ($window, $timeout) {
     var vm = this;
 
-    // Sample JSON data
     vm.items = [
       {
         by: "bot",
