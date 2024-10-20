@@ -170,6 +170,9 @@ angular
       handleArrowUp(){
         this.messageObj[this.carouselIndex].handleArrowUp();
       }
+      handleEnter(event){
+        this.messageObj[this.carouselIndex].handleEnter(event);
+      }
     }
      // Message class for handling individual message interactions
      class Message {
@@ -178,7 +181,7 @@ angular
         this.description = data.description;
         this.image = data.image;
         this.actions = data.actions || [];
-        this.actionFocusIndex = 0;
+        this.actionFocusIndex = -1;
         this.index = index; // Track the message index
       }
 
@@ -208,7 +211,7 @@ angular
       }
  
       handleEnter(){
-        console.log('ENTER',this.text, this.description, this.actions)
+        // handle enter here
       }
 
       isActionFocused(actionIndex){
@@ -217,7 +220,7 @@ angular
         // return false; //when the message is not focused, even when the index is 0, the message is not focused
       }
       resetActionIndex(){
-        this.actionFocusIndex = 0;
+        this.actionFocusIndex = -1;
       }
     }
 
@@ -241,7 +244,7 @@ angular
 
     // Keydown handler for navigating between messages and actions
     vm.handleKeyDown = function (event) {
-      event.preventDefault();
+   
       const currentMessageObj = vm.itemObjects[vm.focusIndex];
 
       if (event.key === "ArrowDown") {
@@ -252,8 +255,9 @@ angular
         currentMessageObj.handleArrowLeft();
       }else if (event.key === "ArrowRight") {
         currentMessageObj.handleArrowRight();
-      } else if (event.key === "Enter") {
-        currentMessageObj.handleEnter();
+      } 
+      else if (event.key === "Enter") {
+        currentMessageObj.handleEnter(event);
       }
 
       // Focus the corresponding message and action button
@@ -265,7 +269,6 @@ angular
     function focusMessage(index) {
       $timeout(() => {
         const messages = document.querySelectorAll('.message');
-        console.log('FOCUS MESSAGE ',messages)
         if (messages[index]) {
           messages[index].focus();
         }
