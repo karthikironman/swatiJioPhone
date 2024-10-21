@@ -250,6 +250,9 @@ angular
       }
     };
 
+    vm.handleClick = function (index) {
+         vm.focusIndex = index;
+    }
     // Keydown handler for navigating between messages and actions
     vm.handleKeyDown = function (event) {
    
