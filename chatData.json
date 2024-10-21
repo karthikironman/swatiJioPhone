@@ -16,8 +16,6 @@
   },
   {
     "by": "bot",
-    "text": "Today's specials are fresh and ready for you!",
-    "carousel": true,
     "items": [
       {
         "text": "Grilled Chicken with Herbs",
@@ -75,8 +73,6 @@
   },
   {
     "by": "bot",
-    "text": "Here's a selection of our desserts!",
-    "carousel": true,
     "items": [
       {
         "text": "Chocolate Lava Cake",
@@ -127,7 +123,39 @@
   },
   {
     "by": "sender",
-    "text": "No, that's all for now."
+    "items": [
+        {
+          "text": "Grilled Chicken with Herbs",
+          "image": "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-roast-a-chicken-step-by-step-png-image_12531944.png",
+          "description": "Tender chicken breast marinated in herbs, served with a side of roasted vegetables.",
+          "actions": [
+            {
+              "text": "Order Grilled Chicken",
+              "link": "https://example.com/grilled_chicken"
+            },
+            {
+              "text": "More Info",
+              "link": "https://example.com/info_grilled_chicken"
+            }
+          ]
+        },
+        {
+            "text": "Grilled Chicken with Herbs",
+            "image": "https://png.pngtree.com/png-vector/20240528/ourmid/pngtree-roast-a-chicken-step-by-step-png-image_12531944.png",
+            "description": "Tender chicken breast marinated in herbs, served with a side of roasted vegetables.",
+            "actions": [
+              {
+                "text": "Order Grilled Chicken",
+                "link": "https://example.com/grilled_chicken"
+              },
+              {
+                "text": "More Info",
+                "link": "https://example.com/info_grilled_chicken"
+              }
+            ]
+          }
+    
+    ]
   },
   {
     "by": "bot",
